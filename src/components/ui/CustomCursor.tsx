@@ -2,50 +2,56 @@
 
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
-import { cn } from "@/lib/utils";
 
 export default function CustomCursor() {
     const cursorRef = useRef<HTMLDivElement>(null);
+    const dotRef = useRef<HTMLDivElement>(null);
     const trailRefs = useRef<HTMLDivElement[]>([]);
     const [text, setText] = useState("");
     const [isHovered, setIsHovered] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
     const mousePos = useRef({ x: 0, y: 0 });
-    const trailPositions = useRef<Array<{ x: number; y: number }>>([]);
 
     useEffect(() => {
         const cursor = cursorRef.current;
-        if (!cursor) return;
+        const dot = dotRef.current;
+        if (!cursor || !dot) return;
 
-        // Initialize trail positions
-        trailPositions.current = Array(5).fill({ x: 0, y: 0 });
+        let rafId: number;
+        let currentX = 0;
+        let currentY = 0;
+        let targetX = 0;
+        let targetY = 0;
 
-        // Use quickTo for optimal performance
-        const xTo = gsap.quickTo(cursor, "x", { duration: 0.15, ease: "power3.out" });
-        const yTo = gsap.quickTo(cursor, "y", { duration: 0.15, ease: "power3.out" });
-
-        const onMouseMove = (e: MouseEvent) => {
-            if (!isVisible) setIsVisible(true);
+        const animate = () => {
+            const dx = targetX - currentX;
+            const dy = targetY - currentY;
             
-            mousePos.current = { x: e.clientX, y: e.clientY };
-            xTo(e.clientX);
-            yTo(e.clientY);
+            currentX += dx * 0.15;
+            currentY += dy * 0.15;
 
-            // Update trail with delay
-            const newPositions = [mousePos.current, ...trailPositions.current.slice(0, -1)];
-            trailPositions.current = newPositions;
+            if (cursor) {
+                cursor.style.transform = `translate(${currentX}px, ${currentY}px)`;
+            }
+            if (dot) {
+                dot.style.transform = `translate(${currentX}px, ${currentY}px)`;
+            }
 
-            // Animate trail elements
             trailRefs.current.forEach((trail, i) => {
-                if (trail && newPositions[i]) {
-                    gsap.to(trail, {
-                        x: newPositions[i].x,
-                        y: newPositions[i].y,
-                        duration: 0.2 + i * 0.08,
-                        ease: "power2.out"
-                    });
+                if (trail) {
+                    const delay = (i + 1) * 0.05;
+                    const trailX = currentX + (targetX - currentX) * delay;
+                    const trailY = currentY + (targetY - currentY) * delay;
+                    trail.style.transform = `translate(${trailX}px, ${trailY}px)`;
                 }
             });
+
+            rafId = requestAnimationFrame(animate);
+        };
+
+        const onMouseMove = (e: MouseEvent) => {
+            targetX = e.clientX;
+            targetY = e.clientY;
+            mousePos.current = { x: e.clientX, y: e.clientY };
         };
 
         const onMouseEnter = (e: MouseEvent) => {
@@ -57,13 +63,6 @@ export default function CustomCursor() {
                 if (cursorText) {
                     setText(cursorText);
                     setIsHovered(true);
-                    
-                    // Animate to larger size
-                    gsap.to(cursor, { 
-                        scale: 1.5, 
-                        duration: 0.3,
-                        ease: "back.out(2)"
-                    });
                 }
             }
         };
@@ -75,31 +74,19 @@ export default function CustomCursor() {
             if (trigger) {
                 setText("");
                 setIsHovered(false);
-                
-                // Animate back to normal size
-                gsap.to(cursor, { 
-                    scale: 1, 
-                    duration: 0.3,
-                    ease: "power2.out"
-                });
             }
         };
 
         const onMouseDown = () => {
-            gsap.to(cursor, { 
-                scale: isHovered ? 1.3 : 0.85, 
-                duration: 0.1,
-                ease: "power2.out"
-            });
+            if (cursor) gsap.to(cursor, { scale: 0.8, duration: 0.1 });
+            if (dot) gsap.to(dot, { scale: 0.7, duration: 0.1 });
             
-            // Ripple effect
             const ripple = document.createElement('div');
-            ripple.className = 'cursor-ripple';
             ripple.style.cssText = `
                 position: fixed;
-                width: 40px;
-                height: 40px;
-                border: 2px solid #D4FF00;
+                width: 30px;
+                height: 30px;
+                border: 2px solid rgba(212, 255, 0, 0.6);
                 border-radius: 50%;
                 pointer-events: none;
                 z-index: 9998;
@@ -110,7 +97,7 @@ export default function CustomCursor() {
             document.body.appendChild(ripple);
             
             gsap.to(ripple, {
-                scale: 2,
+                scale: 2.5,
                 opacity: 0,
                 duration: 0.6,
                 ease: "power2.out",
@@ -119,11 +106,8 @@ export default function CustomCursor() {
         };
 
         const onMouseUp = () => {
-            gsap.to(cursor, { 
-                scale: isHovered ? 1.5 : 1, 
-                duration: 0.1,
-                ease: "power2.out"
-            });
+            if (cursor) gsap.to(cursor, { scale: 1, duration: 0.2 });
+            if (dot) gsap.to(dot, { scale: 1, duration: 0.2 });
         };
 
         window.addEventListener("mousemove", onMouseMove);
@@ -132,77 +116,94 @@ export default function CustomCursor() {
         window.addEventListener("mousedown", onMouseDown);
         window.addEventListener("mouseup", onMouseUp);
 
+        rafId = requestAnimationFrame(animate);
+
         return () => {
+            cancelAnimationFrame(rafId);
             window.removeEventListener("mousemove", onMouseMove);
             document.removeEventListener("mouseover", onMouseEnter);
             document.removeEventListener("mouseout", onMouseLeave);
             window.removeEventListener("mousedown", onMouseDown);
             window.removeEventListener("mouseup", onMouseUp);
         };
-    }, [isVisible, isHovered]);
+    }, []);
 
     return (
         <>
-            {/* Trail elements */}
-            {[...Array(5)].map((_, i) => (
+            {[...Array(4)].map((_, i) => (
                 <div
                     key={i}
                     ref={(el) => {
                         if (el) trailRefs.current[i] = el;
                     }}
-                    className={cn(
-                        "fixed top-0 left-0 pointer-events-none -translate-x-1/2 -translate-y-1/2 rounded-full transition-opacity",
-                        !isVisible && "opacity-0"
-                    )}
                     style={{
-                        zIndex: 9997 - i,
-                        width: `${12 - i * 2}px`,
-                        height: `${12 - i * 2}px`,
+                        position: 'fixed',
+                        top: '-4px',
+                        left: '-4px',
+                        width: `${8 - i * 1.5}px`,
+                        height: `${8 - i * 1.5}px`,
                         backgroundColor: '#D4FF00',
-                        opacity: (0.4 - i * 0.06) * (isHovered ? 0 : 1),
-                        mixBlendMode: 'difference'
+                        borderRadius: '50%',
+                        pointerEvents: 'none',
+                        zIndex: 9996 - i,
+                        opacity: isHovered ? 0 : (0.5 - i * 0.1),
+                        mixBlendMode: 'difference',
+                        transition: 'opacity 0.2s ease'
                     }}
                 />
             ))}
 
-            {/* Main cursor */}
             <div
                 ref={cursorRef}
-                className={cn(
-                    "fixed top-0 left-0 pointer-events-none z-9999 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center transition-all duration-200",
-                    !isVisible && "opacity-0"
-                )}
+                style={{
+                    position: 'fixed',
+                    top: isHovered ? '-40px' : '-16px',
+                    left: isHovered ? '-40px' : '-16px',
+                    width: isHovered ? '80px' : '32px',
+                    height: isHovered ? '80px' : '32px',
+                    border: isHovered ? 'none' : '2px solid #D4FF00',
+                    borderRadius: '50%',
+                    pointerEvents: 'none',
+                    zIndex: 9999,
+                    mixBlendMode: isHovered ? 'normal' : 'difference',
+                    backgroundColor: isHovered ? '#D4FF00' : 'transparent',
+                    transition: 'width 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), height 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), top 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), left 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), background-color 0.3s ease, border 0.3s ease',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}
             >
-                {/* Outer ring */}
-                <div className={cn(
-                    "absolute inset-0 rounded-full border-2 transition-all duration-300",
-                    isHovered 
-                        ? "w-20 h-20 border-lime-acid bg-lime-acid" 
-                        : "w-8 h-8 border-lime-acid bg-transparent mix-blend-difference"
-                )}>
-                    {/* Inner dot */}
-                    {!isHovered && (
-                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-1.5 h-1.5 bg-lime-acid rounded-full" />
-                    )}
-                </div>
-
-                {/* Text label */}
-                {isHovered && (
-                    <span className="relative z-10 font-mono text-[9px] font-bold tracking-[0.15em] text-black animate-fade-in">
+                {isHovered && text && (
+                    <span style={{
+                        fontFamily: 'monospace',
+                        fontSize: '9px',
+                        fontWeight: 'bold',
+                        letterSpacing: '0.15em',
+                        color: '#000',
+                        textAlign: 'center'
+                    }}>
                         {text}
                     </span>
                 )}
             </div>
 
-            <style jsx>{`
-                @keyframes fade-in {
-                    from { opacity: 0; transform: scale(0.9); }
-                    to { opacity: 1; transform: scale(1); }
-                }
-                .animate-fade-in {
-                    animation: fade-in 0.2s ease-out;
-                }
-            `}</style>
+            <div
+                ref={dotRef}
+                style={{
+                    position: 'fixed',
+                    top: '-3px',
+                    left: '-3px',
+                    width: '6px',
+                    height: '6px',
+                    backgroundColor: '#D4FF00',
+                    borderRadius: '50%',
+                    pointerEvents: 'none',
+                    zIndex: 10000,
+                    mixBlendMode: 'difference',
+                    opacity: isHovered ? 0 : 1,
+                    transition: 'opacity 0.3s ease'
+                }}
+            />
         </>
     );
 }
