@@ -16,25 +16,25 @@ export default function Stack() {
     { 
       label: 'Frontend', 
       icon: Code2, 
-      tools: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Vite'],
+      tools: ['React', 'Next.js', 'TypeScript', 'React Native', 'Tailwind CSS'],
       color: 'lime-acid'
     },
     { 
-      label: 'Creative', 
-      icon: Sparkles, 
-      tools: ['GSAP', 'Three.js', 'WebGL', 'Framer Motion', 'Canvas API'],
+      label: 'Design & Motion', 
+      icon: Palette, 
+      tools: ['Figma', 'After Effects', 'Photoshop', 'Illustrator', 'Blender'],
       color: 'white'
     },
     { 
       label: 'Backend', 
       icon: Database, 
-      tools: ['Node.js', 'Supabase', 'Firebase', 'PostgreSQL', 'REST APIs'],
+      tools: ['Node.js', 'Django', 'MongoDB', 'PostgreSQL', 'Firebase'],
       color: 'lime-acid'
     },
     { 
-      label: 'Design', 
-      icon: Palette, 
-      tools: ['Figma', 'Adobe XD', 'Blender', 'Spline', 'Typography'],
+      label: 'Mobile & 3D', 
+      icon: Sparkles, 
+      tools: ['Flutter', 'GSAP', 'Three.js', 'WebGL', 'Premiere Pro'],
       color: 'white'
     },
   ];
@@ -121,31 +121,57 @@ export default function Stack() {
         </div>
       </div>
 
-      {/* Manifesto Column */}
+      {/* About Orko Biswas Column */}
       <div className="relative p-8 md:p-16 lg:p-24 flex flex-col justify-between manifesto-content">
         <div>
           <div className="flex items-center gap-3 mb-8">
             <Zap className="w-6 h-6 text-lime-acid" />
-            <h3 className="font-display text-3xl md:text-4xl font-bold text-white uppercase tracking-tight">Manifesto</h3>
+            <h3 className="font-display text-3xl md:text-4xl font-bold text-white uppercase tracking-tight">About Orko Biswas</h3>
+          </div>
+
+          {/* Avatar Photo Section */}
+          <div className="mb-10 relative">
+            <div className="relative w-48 h-48 mx-auto group">
+              {/* Futuristic Frame */}
+              <div className="absolute inset-0 border-2 border-lime-acid/30 group-hover:border-lime-acid transition-all duration-500">
+                {/* Corner Accents */}
+                <div className="absolute -top-2 -left-2 w-6 h-6 border-l-2 border-t-2 border-lime-acid" />
+                <div className="absolute -top-2 -right-2 w-6 h-6 border-r-2 border-t-2 border-lime-acid" />
+                <div className="absolute -bottom-2 -left-2 w-6 h-6 border-l-2 border-b-2 border-lime-acid" />
+                <div className="absolute -bottom-2 -right-2 w-6 h-6 border-r-2 border-b-2 border-lime-acid" />
+              </div>
+              
+              {/* Glow Effect */}
+              <div className="absolute inset-0 bg-lime-acid/10 blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              {/* Image Container */}
+              <div className="relative w-full h-full overflow-hidden bg-cement">
+                <img 
+                  src="/Orko Biswas.png"
+                  alt="Orko Biswas"
+                  className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-700"
+                />
+                {/* Scanline Overlay */}
+                <div className="absolute inset-0 bg-linear-to-b from-transparent via-lime-acid/5 to-transparent opacity-50 animate-scan" />
+              </div>
+            </div>
           </div>
           
           <div className="space-y-8 mb-12">
             <p className="text-2xl md:text-3xl lg:text-4xl leading-tight font-display">
-              <span className="text-gray-400">"The web is my </span>
-              <span className="text-white font-bold">battleground</span>
-              <span className="text-gray-400">. I fight mediocrity with </span>
-              <span className="text-lime-acid font-bold">bold design</span>
-              <span className="text-gray-400"> and </span>
-              <span className="text-white font-bold">kinetic motion</span>
+              <span className="text-gray-400">"I am a </span>
+              <span className="text-lime-acid font-bold">versatile creator</span>
+              <span className="text-gray-400"> who operates at the intersection of </span>
+              <span className="text-white font-bold">design and engineering</span>
               <span className="text-gray-400">."</span>
             </p>
 
             <div className="border-l-2 border-lime-acid pl-6">
               <p className="font-body text-gray-400 leading-relaxed mb-4">
-                I don't build websites. I engineer <span className="text-white font-bold">digital experiences</span> that command attention and drive action.
+                With a background in <span className="text-white font-bold">Graphic and Motion Design</span>, I bring a detail-oriented aesthetic to the functional world of <span className="text-white font-bold">Software Development</span>.
               </p>
               <p className="font-body text-gray-400 leading-relaxed">
-                Every project is an opportunity to push boundaries—to merge brutalist minimalism with fluid, buttery interactions that make users stop and stare.
+                I craft high-fidelity interfaces in Figma, create immersive motion graphics with After Effects, and translate designs into <span className="text-lime-acid font-bold">pixel-perfect, scalable code</span> using the MERN Stack, Flutter, and Django.
               </p>
             </div>
           </div>
@@ -154,10 +180,10 @@ export default function Stack() {
           <div className="space-y-4 mb-12">
             <p className="font-mono text-xs text-lime-acid tracking-widest mb-3">// CORE PRINCIPLES</p>
             {[
-              'Performance is non-negotiable',
-              'Motion should feel inevitable',
-              'Every pixel serves a purpose',
-              'Bold choices over safe ones',
+              'Design and code are not separate—they are one',
+              'From concept to deployment, I own the entire lifecycle',
+              'User experience drives every technical decision',
+              'Motion and aesthetics meet performance and scale',
             ].map((principle, index) => (
               <div key={index} className="flex items-center gap-3 group">
                 <div className="w-1 h-1 bg-lime-acid group-hover:w-6 transition-all" />

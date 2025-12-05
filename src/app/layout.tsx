@@ -17,8 +17,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Orko Biswas | Visual Creative Engineer",
-  description: "Visual Creative Engineer based in Dhaka, Bangladesh.",
+  title: "Orko Biswas | Full-Stack Product Designer & Developer",
+  description: "A hybrid professional bridging design and development. Eliminating friction between creative vision and technical execution.",
 };
 
 export default function RootLayout({

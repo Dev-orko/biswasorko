@@ -7,8 +7,8 @@ import { ArrowUpRight, Terminal, Code2, Zap } from "lucide-react";
 export default function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
     const cursorRef = useRef<HTMLDivElement>(null);
-    const [glitchText, setGlitchText] = useState('DEVELOPER');
-    const roles = ['D3V3L0P3R', 'DEVELOPER', 'D€V€£ØP€R', 'DEVELOPER'];
+    const [glitchText, setGlitchText] = useState('PRODUCT');
+    const roles = ['PR0DU€T', 'PRODUCT', 'P®ØDUCT', 'PRODUCT'];
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
     useEffect(() => {
@@ -20,7 +20,7 @@ export default function Hero() {
 
         setTimeout(() => {
             clearInterval(glitchInterval);
-            setGlitchText('DEVELOPER');
+            setGlitchText('PRODUCT');
         }, 2000);
 
         const mainInterval = setInterval(() => {
@@ -32,7 +32,7 @@ export default function Hero() {
 
             setTimeout(() => {
                 clearInterval(glitchInterval);
-                setGlitchText('DEVELOPER');
+                setGlitchText('PRODUCT');
             }, 2000);
         }, 5000);
 
@@ -147,7 +147,7 @@ export default function Hero() {
                     <div className="mb-10 max-w-6xl">
                         <div className="overflow-hidden mb-2">
                             <h1 className="font-display text-[11vw] sm:text-[9vw] md:text-[7.5vw] lg:text-[6.5vw] font-bold tracking-[-0.02em] leading-[0.85]">
-                                <span className="inline-block text-white">VISUAL</span>
+                                <span className="inline-block text-white">FULL-STACK</span>
                             </h1>
                         </div>
                         <div className="overflow-hidden mb-2">
@@ -157,7 +157,7 @@ export default function Hero() {
                         </div>
                         <div className="overflow-hidden">
                             <h1 className="font-display text-[11vw] sm:text-[9vw] md:text-[7.5vw] lg:text-[6.5vw] font-bold tracking-[-0.02em] leading-[0.85]">
-                                <span className="inline-block text-white opacity-20" style={{ WebkitTextStroke: '2px white' }}>ENGINEER</span>
+                                <span className="inline-block text-white opacity-20" style={{ WebkitTextStroke: '2px white' }}>DESIGNER</span>
                             </h1>
                         </div>
                     </div>
@@ -169,9 +169,8 @@ export default function Hero() {
                         <div>
                             <div className="font-mono text-sm text-gray-600 mb-3">{'// System Output:'}</div>
                             <p className="font-body text-lg md:text-xl text-gray-300 leading-relaxed">
-                                Crafting <span className="text-lime-acid font-bold">pixel-perfect interfaces</span> and 
-                                <span className="text-lime-acid font-bold"> high-performance code</span>. 
-                                Where design meets engineering.
+                                Bridging the gap between <span className="text-lime-acid font-bold">design and development</span>. 
+                                I don't just hand off designs—<span className="text-lime-acid font-bold">I bring them to life</span> with code.
                             </p>
                         </div>
 

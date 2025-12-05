@@ -14,30 +14,30 @@ export default function Services() {
 
     const services = [
         { 
-            title: "INTERFACE DESIGN", 
-            desc: "Crafting pixel-perfect, user-centric interfaces that blend aesthetics with functionality",
-            tags: ["UI/UX", "Prototyping", "Design Systems"],
+            title: "PRODUCT DESIGN", 
+            desc: "End-to-end product design from user research and wireframing to high-fidelity prototypes in Figma",
+            tags: ["UI/UX", "Figma", "User Research"],
             icon: Sparkles,
             color: "lime-acid"
         },
         { 
-            title: "CREATIVE DEV", 
-            desc: "Building modern web experiences with cutting-edge technologies and clean architecture",
-            tags: ["React", "Next.js", "TypeScript"],
+            title: "FULL-STACK DEV", 
+            desc: "Building scalable web and mobile applications with React, Next.js, React Native, Flutter, and Django",
+            tags: ["React", "Flutter", "Node.js", "Django"],
             icon: Zap,
             color: "cyan-400"
         },
         { 
-            title: "MOTION & 3D", 
-            desc: "Bringing designs to life with smooth animations, WebGL, and interactive experiences",
-            tags: ["GSAP", "Three.js", "WebGL"],
+            title: "MOTION & VISUAL", 
+            desc: "Creating high-end promotional videos, motion graphics, and brand assets using After Effects and Adobe Suite",
+            tags: ["After Effects", "Photoshop", "Illustrator"],
             icon: Box,
             color: "purple-400"
         },
         { 
-            title: "DIGITAL STRATEGY", 
-            desc: "Optimizing performance, analytics, and product strategy for measurable growth",
-            tags: ["Analytics", "SEO", "Performance"],
+            title: "3D & ANIMATION", 
+            desc: "Bringing interfaces to life with GSAP, Three.js, WebGL, and Blender for immersive 3D experiences",
+            tags: ["Blender", "Three.js", "GSAP"],
             icon: Layers,
             color: "pink-400"
         },

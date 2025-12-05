@@ -2,13 +2,13 @@
 
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import { Linkedin, Twitter, Instagram, Github } from "lucide-react";
+import { Linkedin, Twitter, Instagram, Github, Mail, Calendar, MapPin, Clock, Zap, Send, Phone } from "lucide-react";
 import gsap from "gsap";
 
 export default function Contact() {
     const [time, setTime] = useState<string>("");
     const [mounted, setMounted] = useState(false);
-    const ctaRef = useRef<HTMLDivElement>(null);
+    const sectionRef = useRef<HTMLElement>(null);
 
     useEffect(() => {
         setMounted(true);
@@ -17,168 +17,202 @@ export default function Contact() {
             setTime(now.toLocaleTimeString("en-US", { hour12: false }));
         };
         
-        updateTime(); // Set initial time
+        updateTime();
         const interval = setInterval(updateTime, 1000);
         return () => clearInterval(interval);
     }, []);
 
     useEffect(() => {
-        if (ctaRef.current) {
-            const handleMouseMove = (e: MouseEvent) => {
-                const { left, top, width, height } = ctaRef.current!.getBoundingClientRect();
-                const x = (e.clientX - left - width / 2) / 20;
-                const y = (e.clientY - top - height / 2) / 20;
-                
-                gsap.to(ctaRef.current, {
-                    x,
-                    y,
-                    duration: 0.5,
-                    ease: 'power2.out',
-                });
-            };
+        const ctx = gsap.context(() => {
+            gsap.from('.contact-header', {
+                y: 80,
+                opacity: 0,
+                duration: 1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: 'top 60%',
+                },
+            });
 
-            const handleMouseLeave = () => {
-                gsap.to(ctaRef.current, {
-                    x: 0,
-                    y: 0,
-                    duration: 0.5,
-                    ease: 'elastic.out(1, 0.3)',
-                });
-            };
+            gsap.from('.contact-card', {
+                y: 60,
+                opacity: 0,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: 'top 50%',
+                },
+            });
+        }, sectionRef);
 
-            ctaRef.current.addEventListener('mousemove', handleMouseMove);
-            ctaRef.current.addEventListener('mouseleave', handleMouseLeave);
-
-            return () => {
-                ctaRef.current?.removeEventListener('mousemove', handleMouseMove);
-                ctaRef.current?.removeEventListener('mouseleave', handleMouseLeave);
-            };
-        }
+        return () => ctx.revert();
     }, []);
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
+    const contactMethods = [
+        {
+            icon: Mail,
+            title: "Email Me",
+            subtitle: "Response in 24h",
+            value: "orkobiswas@example.com",
+            href: "mailto:orkobiswas@example.com",
+            color: "lime-acid"
+        },
+        {
+            icon: Calendar,
+            title: "Schedule Call",
+            subtitle: "30-min free consultation",
+            value: "Book a meeting",
+            href: "#",
+            color: "cyan-400"
+        },
+        {
+            icon: Phone,
+            title: "WhatsApp",
+            subtitle: "Quick chat",
+            value: "+880 1XXX-XXXXXX",
+            href: "#",
+            color: "green-400"
+        }
+    ];
+
     const socialLinks = [
-        { icon: Linkedin, label: "LinkedIn", href: "#", tag: "_LI" },
-        { icon: Twitter, label: "Twitter", href: "#", tag: "_X" },
-        { icon: Instagram, label: "Instagram", href: "#", tag: "_IG" },
-        { icon: Github, label: "GitHub", href: "#", tag: "_GH" },
+        { icon: Linkedin, label: "LinkedIn", href: "#", tag: "linkedin.com/in/orkobiswas" },
+        { icon: Twitter, label: "Twitter", href: "#", tag: "@orkobiswas" },
+        { icon: Instagram, label: "Instagram", href: "#", tag: "@orko.dev" },
+        { icon: Github, label: "GitHub", href: "#", tag: "github.com/Dev-orko" },
+    ];
+
+    const stats = [
+        { label: "Response Time", value: "< 24h", icon: Clock },
+        { label: "Projects Done", value: "50+", icon: Zap },
+        { label: "Availability", value: "Open", icon: MapPin }
     ];
 
     return (
         <footer
+            ref={sectionRef}
             id="contact"
-            className="min-h-screen bg-void relative border-t border-white/10 flex flex-col justify-between overflow-hidden"
+            className="relative bg-void overflow-hidden"
         >
-            {/* Kinetic Grid Background */}
-            <div className="absolute inset-0 opacity-20" style={{
-                backgroundImage: 'linear-gradient(rgba(212, 255, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(212, 255, 0, 0.1) 1px, transparent 1px)',
-                backgroundSize: '40px 40px',
-                maskImage: 'radial-gradient(circle at center, black 40%, transparent 100%)'
-            }} />
+            {/* Background Elements */}
+            <div className="absolute inset-0 bg-grid opacity-[0.02]" />
+            <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-lime-acid/5 rounded-full blur-[120px]" />
+            <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/5 rounded-full blur-[120px]" />
 
             {/* Main Content */}
-            <div className="flex-1 flex items-center justify-center px-4 md:px-20 py-32 relative z-10">
-                <div className="max-w-6xl mx-auto text-center">
-                    {/* Badge */}
-                    <div className="inline-flex items-center gap-2 px-4 py-2 border border-lime-acid/30 bg-black/50 backdrop-blur-sm mb-12">
-                        <span className="w-2 h-2 bg-lime-acid animate-pulse" />
-                        <span className="font-mono text-xs text-lime-acid tracking-widest">LET'S CREATE TOGETHER</span>
+            <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 py-32">
+                
+                {/* Header */}
+                <div className="contact-header text-center mb-16">
+                    <div className="inline-block mb-6 px-4 py-2 border border-lime-acid/30 font-mono text-xs text-lime-acid tracking-[0.3em]">
+                        GET IN TOUCH
                     </div>
+                    <h2 className="font-display text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.02em] leading-[0.9] mb-6">
+                        <span className="block text-white">LET'S BUILD</span>
+                        <span className="block text-lime-acid relative">
+                            SOMETHING
+                            <div className="absolute -inset-2 bg-lime-acid/10 blur-xl -z-10" />
+                        </span>
+                        <span className="block text-white">AMAZING</span>
+                    </h2>
+                    <p className="font-body text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                        Looking for someone who can handle the entire product lifecycle—from concept to deployment? Let's talk about bringing your vision to life.
+                    </p>
+                </div>
 
-                    {/* Main CTA */}
-                    <div ref={ctaRef} className="mb-16">
-                        <h2 className="kinetic-skew font-display text-6xl md:text-8xl lg:text-9xl font-bold text-white mb-6 leading-none tracking-tighter uppercase">
-                            Start Your
-                            <span className="block text-transparent stroke-text" style={{ WebkitTextStroke: '2px #D4FF00' }}>Project Today</span>
-                        </h2>
-                        <p className="font-body text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12">
-                            Have an idea? Let's bring it to life. I'm currently available for freelance work and exciting collaborations.
+                {/* Social Links Section */}
+                <div className="contact-card bg-black/60 backdrop-blur-sm border-2 border-lime-acid/20 p-12 mb-16">
+                    <div className="text-center mb-8">
+                        <h3 className="font-display text-3xl font-bold text-white mb-3">
+                            FOLLOW MY JOURNEY
+                        </h3>
+                        <p className="font-mono text-sm text-lime-acid/60 tracking-wider font-bold">
+                            Connect with me on social media
                         </p>
                     </div>
-
-                    {/* Contact Methods */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-16">
-                        <a
-                            href="mailto:orko@example.com"
-                            className="group glass rounded-2xl p-8 hover:scale-105 transition-all duration-500 hover:bg-white/10"
-                        >
-                            <div className="text-4xl mb-4">✉️</div>
-                            <h3 className="font-display text-2xl font-bold text-white mb-2 group-hover:text-lime-acid transition-colors">
-                                Email Me
-                            </h3>
-                            <p className="font-mono text-sm text-gray-400">orko@example.com</p>
-                        </a>
-
-                        <a
-                            href="#"
-                            className="group glass rounded-2xl p-8 hover:scale-105 transition-all duration-500 hover:bg-white/10"
-                        >
-                            <div className="text-4xl mb-4">📅</div>
-                            <h3 className="font-display text-2xl font-bold text-white mb-2 group-hover:text-lime-acid transition-colors">
-                                Schedule Call
-                            </h3>
-                            <p className="font-mono text-sm text-gray-400">Book a meeting</p>
-                        </a>
-                    </div>
-
-                    {/* Social Links */}
-                    <div className="flex justify-center gap-4 mb-16">
-                        {socialLinks.map((social, index) => (
-                            <a
-                                key={index}
-                                href={social.href}
-                                className="w-12 h-12 glass rounded-full flex items-center justify-center hover:bg-lime-acid hover:scale-110 transition-all group"
-                            >
-                                <social.icon className="w-5 h-5 text-white group-hover:text-black transition-colors" />
-                            </a>
-                        ))}
+                    
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        {socialLinks.map((social, index) => {
+                            const Icon = social.icon;
+                            return (
+                                <a
+                                    key={index}
+                                    href={social.href}
+                                    className="group relative bg-black/40 border border-lime-acid/30 p-6 hover:border-lime-acid/60 hover:bg-lime-acid/10 transition-all hover-trigger"
+                                    data-cursor="FOLLOW"
+                                >
+                                    <div className="flex flex-col items-center gap-3">
+                                        <Icon className="w-6 h-6 text-lime-acid group-hover:scale-110 transition-transform" />
+                                        <div className="text-center">
+                                            <div className="font-display text-sm font-bold text-white mb-1">
+                                                {social.label}
+                                            </div>
+                                            <div className="font-mono text-xs text-gray-600 group-hover:text-lime-acid transition-colors">
+                                                {social.tag}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            );
+                        })}
                     </div>
                 </div>
             </div>
 
-            {/* Footer Info */}
-            <div className="border-t border-white/10 relative z-10">
-                <div className="max-w-7xl mx-auto px-4 md:px-12 py-12">
+            {/* Footer Info Bar */}
+            <div className="border-t-2 border-lime-acid/20 bg-black/50 relative z-10">
+                <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-8">
                     <div className="grid grid-cols-1 md:grid-cols-4 gap-8 font-mono text-xs">
                         {/* Location */}
                         <div>
-                            <div className="text-gray-500 mb-2">LOCATION</div>
+                            <div className="flex items-center gap-2 text-lime-acid mb-2">
+                                <MapPin className="w-3 h-3" />
+                                <span className="font-bold tracking-wider">LOCATION</span>
+                            </div>
                             <div className="text-white">Dhaka, Bangladesh</div>
                             <div className="text-gray-600 text-[10px]">23.81°N, 90.41°E</div>
                         </div>
 
                         {/* Time */}
                         <div>
-                            <div className="text-gray-500 mb-2">LOCAL TIME</div>
-                            <div className="text-lime-acid font-bold text-lg">
+                            <div className="flex items-center gap-2 text-lime-acid mb-2">
+                                <Clock className="w-3 h-3" />
+                                <span className="font-bold tracking-wider">LOCAL TIME</span>
+                            </div>
+                            <div className="text-white text-lg font-bold">
                                 {mounted ? time : "--:--:--"}
                             </div>
+                            <div className="text-gray-600 text-[10px]">GMT+6</div>
                         </div>
 
                         {/* Quick Links */}
                         <div>
-                            <div className="text-gray-500 mb-2">QUICK LINKS</div>
-                            <div className="space-y-1">
-                                {['Home', 'About', 'Work', 'Lab'].map((link, i) => (
+                            <div className="text-lime-acid mb-2 font-bold tracking-wider">NAVIGATION</div>
+                            <div className="grid grid-cols-2 gap-1">
+                                {['Home', 'About', 'Work', 'Services'].map((link, i) => (
                                     <Link
                                         key={i}
                                         href={`#${link.toLowerCase()}`}
-                                        className="block text-white hover:text-lime-acid transition-colors"
+                                        className="text-gray-500 hover:text-lime-acid transition-colors"
                                     >
-                                        {link}
+                                        → {link}
                                     </Link>
                                 ))}
                             </div>
                         </div>
 
                         {/* Back to Top */}
-                        <div>
+                        <div className="flex items-end">
                             <button
                                 onClick={scrollToTop}
-                                className="w-full px-4 py-3 glass rounded-xl hover:bg-lime-acid hover:text-black transition-all flex items-center justify-center gap-2 group"
+                                className="w-full px-6 py-3 bg-cement border border-lime-acid/30 hover:bg-lime-acid hover:text-black transition-all flex items-center justify-center gap-2 group font-bold tracking-wider"
                             >
                                 <span>BACK TO TOP</span>
                                 <span className="group-hover:-translate-y-1 transition-transform">↑</span>
@@ -188,14 +222,16 @@ export default function Contact() {
                 </div>
 
                 {/* Copyright Bar */}
-                <div className="bg-black/50 border-t border-white/5 py-4 px-4 md:px-12">
-                    <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-xs text-gray-600">
-                        <div>© 2025 Orko Biswas. All rights reserved.</div>
-                        <div className="flex items-center gap-6">
-                            <span>Designed & Developed with ♥</span>
+                <div className="border-t border-white/5 py-6 px-6 md:px-12">
+                    <div className="max-w-[1600px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-xs">
+                        <div className="text-gray-600">
+                            © 2025 <span className="text-lime-acid">Orko Biswas</span>. All rights reserved.
+                        </div>
+                        <div className="flex items-center gap-6 text-gray-600">
+                            <span>Crafted with passion & code</span>
                             <div className="flex items-center gap-2">
                                 <span className="w-2 h-2 rounded-full bg-lime-acid animate-pulse" />
-                                <span className="text-lime-acid">ONLINE</span>
+                                <span className="text-lime-acid font-bold">ONLINE</span>
                             </div>
                         </div>
                     </div>
