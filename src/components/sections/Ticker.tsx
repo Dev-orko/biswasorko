@@ -36,6 +36,10 @@ export default function Ticker() {
             <div key={i} className="flex items-center gap-10">
               <span className="font-display text-5xl md:text-6xl lg:text-7xl font-black text-white glitch-ticker tracking-[-0.03em]" data-text="REACT">REACT</span>
               <span className="text-lime-acid text-4xl">●</span>
+              <span className="font-display text-5xl md:text-6xl lg:text-7xl font-black text-white glitch-ticker tracking-[-0.03em]" data-text="NEXT.JS">NEXT.JS</span>
+              <span className="text-lime-acid text-4xl">●</span>
+              <span className="font-display text-5xl md:text-6xl lg:text-7xl font-black text-white glitch-ticker tracking-[-0.03em]" data-text="TAILWIND CSS">TAILWIND CSS</span>
+              <span className="text-lime-acid text-4xl">●</span>
               <span className="font-display text-5xl md:text-6xl lg:text-7xl font-black text-white glitch-ticker tracking-[-0.03em]" data-text="FIGMA">FIGMA</span>
               <span className="text-lime-acid text-4xl">●</span>
               <span className="font-display text-5xl md:text-6xl lg:text-7xl font-black text-white glitch-ticker tracking-[-0.03em]" data-text="AFTER EFFECTS">AFTER EFFECTS</span>
@@ -44,11 +48,7 @@ export default function Ticker() {
               <span className="text-lime-acid text-4xl">●</span>
               <span className="font-display text-5xl md:text-6xl lg:text-7xl font-black text-white glitch-ticker tracking-[-0.03em]" data-text="FLUTTER">FLUTTER</span>
               <span className="text-lime-acid text-4xl">●</span>
-              <span className="font-display text-5xl md:text-6xl lg:text-7xl font-black text-white glitch-ticker tracking-[-0.03em]" data-text="BLENDER">BLENDER</span>
-              <span className="text-lime-acid text-4xl">●</span>
               <span className="font-display text-5xl md:text-6xl lg:text-7xl font-black text-white glitch-ticker tracking-[-0.03em]" data-text="DJANGO">DJANGO</span>
-              <span className="text-lime-acid text-4xl">●</span>
-              <span className="font-display text-5xl md:text-6xl lg:text-7xl font-black text-white glitch-ticker tracking-[-0.03em]" data-text="NEXT.JS">NEXT.JS</span>
               <span className="text-lime-acid text-4xl">●</span>
             </div>
           ))}

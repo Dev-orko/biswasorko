@@ -22,7 +22,7 @@ export default function Stack() {
     { 
       label: 'Design & Motion', 
       icon: Palette, 
-      tools: ['Figma', 'After Effects', 'Photoshop', 'Illustrator', 'Blender'],
+      tools: ['Figma', 'After Effects', 'Photoshop', 'Illustrator', 'Premiere Pro'],
       color: 'white'
     },
     { 
@@ -32,9 +32,9 @@ export default function Stack() {
       color: 'lime-acid'
     },
     { 
-      label: 'Mobile & 3D', 
+      label: 'Mobile & Animation', 
       icon: Sparkles, 
-      tools: ['Flutter', 'GSAP', 'Three.js', 'WebGL', 'Premiere Pro'],
+      tools: ['Flutter', 'GSAP', 'Framer Motion', 'Canva', 'Affinity'],
       color: 'white'
     },
   ];
@@ -171,7 +171,7 @@ export default function Stack() {
                 With a background in <span className="text-white font-bold">Graphic and Motion Design</span>, I bring a detail-oriented aesthetic to the functional world of <span className="text-white font-bold">Software Development</span>.
               </p>
               <p className="font-body text-gray-400 leading-relaxed">
-                I craft high-fidelity interfaces in Figma, create immersive motion graphics with After Effects, and translate designs into <span className="text-lime-acid font-bold">pixel-perfect, scalable code</span> using the MERN Stack, Flutter, and Django.
+                I craft high-fidelity interfaces in Figma, create immersive motion graphics with After Effects, and translate designs into <span className="text-lime-acid font-bold">pixel-perfect, scalable code</span> using React, Next.js, Tailwind CSS, Flutter, and Django.
               </p>
             </div>
           </div>

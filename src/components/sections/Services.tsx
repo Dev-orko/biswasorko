@@ -23,7 +23,7 @@ export default function Services() {
         { 
             title: "FULL-STACK DEV", 
             desc: "Building scalable web and mobile applications with React, Next.js, React Native, Flutter, and Django",
-            tags: ["React", "Flutter", "Node.js", "Django"],
+            tags: ["Next.js", "Flutter", "Tailwind CSS", "Django"],
             icon: Zap,
             color: "cyan-400"
         },
@@ -35,9 +35,9 @@ export default function Services() {
             color: "purple-400"
         },
         { 
-            title: "3D & ANIMATION", 
-            desc: "Bringing interfaces to life with GSAP, Three.js, WebGL, and Blender for immersive 3D experiences",
-            tags: ["Blender", "Three.js", "GSAP"],
+            title: "WEB ANIMATION", 
+            desc: "Designing smooth, performant animations and interactive experiences using GSAP and Framer Motion",
+            tags: ["GSAP", "Framer Motion", "CSS Animations"],
             icon: Layers,
             color: "pink-400"
         },
