@@ -6,7 +6,6 @@ import { ArrowUpRight, Terminal, Code2, Zap } from "lucide-react";
 
 export default function Hero() {
     const containerRef = useRef<HTMLDivElement>(null);
-    const cursorRef = useRef<HTMLDivElement>(null);
     const [glitchText, setGlitchText] = useState('VISUAL');
     const roles = ['V1SU@L', 'VISUAL', 'V!$U∆L', 'VISUAL'];
     const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
@@ -82,15 +81,6 @@ export default function Hero() {
     useEffect(() => {
         const handleMouseMove = (e: MouseEvent) => {
             setMousePos({ x: e.clientX, y: e.clientY });
-            
-            if (cursorRef.current) {
-                gsap.to(cursorRef.current, {
-                    x: e.clientX,
-                    y: e.clientY,
-                    duration: 0.3,
-                    ease: 'power2.out',
-                });
-            }
         };
 
         window.addEventListener('mousemove', handleMouseMove);
@@ -103,13 +93,6 @@ export default function Hero() {
             id="home"
             className="relative min-h-screen flex items-center overflow-hidden bg-void"
         >
-            {/* Custom Cursor Trail */}
-            <div 
-                ref={cursorRef}
-                className="fixed w-8 h-8 border-2 border-lime-acid pointer-events-none z-50 mix-blend-difference"
-                style={{ left: -16, top: -16 }}
-            />
-
             {/* Simple Grid Background */}
             <div className="absolute inset-0 bg-grid opacity-[0.02]" />
 
