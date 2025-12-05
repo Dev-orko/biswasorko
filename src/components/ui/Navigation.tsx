@@ -61,31 +61,33 @@ export default function Navigation() {
 
     return (
         <>
-            {/* Fixed Corners */}
-            <nav className="fixed top-8 left-8 z-50 mix-blend-difference block">
-                <Link href="/" className="font-display font-bold text-xl hover-trigger tracking-tight" data-cursor="HOME">
-                    ORKO BISWAS
-                </Link>
+            {/* Glassmorphism Navbar */}
+            <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30 border-b border-white/10">
+                <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
+                    <Link href="/" className="font-display font-bold text-xl hover-trigger tracking-tight text-white" data-cursor="HOME">
+                        ORKO BISWAS
+                    </Link>
+                    
+                    <div className="flex gap-8 items-center">
+                        <div className="hidden md:block font-mono text-xs text-gray-400">
+                            DHAKA, BD <span className="text-white ml-2">{mounted ? time : "--:--:--"}</span>
+                        </div>
+                        <div className="relative group">
+                            <MagneticButton>
+                                <button
+                                    onClick={toggleMenu}
+                                    className="font-mono text-xs border border-white/20 px-6 py-2 hover:bg-lime-acid hover:text-black hover:border-lime-acid transition-all uppercase hover-trigger tracking-widest text-white"
+                                    data-cursor="OPEN"
+                                >
+                                    Menu
+                                </button>
+                            </MagneticButton>
+                        </div>
+                    </div>
+                </div>
             </nav>
 
-            <div className="fixed top-8 right-8 z-50 flex gap-8 items-center mix-blend-difference">
-                <div className="hidden md:block font-mono text-xs text-gray-400">
-                    DHAKA, BD <span className="text-white ml-2">{mounted ? time : "--:--:--"}</span>
-                </div>
-                <div className="relative group">
-                    <MagneticButton>
-                        <button
-                            onClick={toggleMenu}
-                            className="font-mono text-xs border border-white/20 px-6 py-2 hover:bg-lime-acid hover:text-black hover:border-lime-acid transition-all uppercase hover-trigger tracking-widest"
-                            data-cursor="OPEN"
-                        >
-                            Menu
-                        </button>
-                    </MagneticButton>
-                </div>
-            </div>
-
-            <div className="fixed bottom-8 left-8 z-50 mix-blend-difference block">
+            <div className="fixed bottom-8 left-8 z-50 block">
                 <div className="font-mono text-xs text-gray-400 rotate-180" style={{ writingMode: "vertical-rl" }}>
                     SCROLL_Y: <span id="scroll-y" className="text-white">0000</span>
                 </div>

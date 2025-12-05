@@ -91,7 +91,7 @@ export default function Hero() {
         <section
             ref={containerRef}
             id="home"
-            className="relative min-h-screen flex items-center overflow-hidden bg-void"
+            className="relative min-h-screen flex items-center overflow-hidden bg-void pt-20"
         >
             {/* Simple Grid Background */}
             <div className="absolute inset-0 bg-grid opacity-[0.02]" />
