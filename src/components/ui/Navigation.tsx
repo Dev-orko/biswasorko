@@ -63,8 +63,8 @@ export default function Navigation() {
         <>
             {/* Fixed Corners */}
             <nav className="fixed top-8 left-8 z-50 mix-blend-difference block">
-                <Link href="/" className="font-display font-bold text-2xl hover-trigger" data-cursor="HOME">
-                    OB.
+                <Link href="/" className="font-display font-bold text-xl hover-trigger tracking-tight" data-cursor="HOME">
+                    ORKO BISWAS
                 </Link>
             </nav>
 
