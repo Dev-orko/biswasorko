@@ -104,35 +104,35 @@ export default function Services() {
                 </div>
 
                 {/* Services Grid - Bento Style */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-12">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-12">
                     {services.map((service, index) => (
                         <div
                             key={index}
                             className="service-card-new group relative hover-trigger"
                             data-cursor="EXPLORE"
                         >
-                            <div className="relative h-full bg-cement border-2 border-white/5 p-10 overflow-hidden transition-all duration-500 hover:border-lime-acid/30 hover:-translate-y-2">
+                            <div className="relative h-full bg-cement border-2 border-white/5 p-6 sm:p-8 lg:p-10 overflow-hidden transition-all duration-500 hover:border-lime-acid/30 hover:-translate-y-2">
                                 
                                 {/* Large Number Background */}
-                                <div className="absolute top-4 right-4 font-display text-[200px] font-black text-white/[0.02] leading-none pointer-events-none service-number">
+                                <div className="absolute top-4 right-4 font-display text-[120px] sm:text-[160px] lg:text-[200px] font-black text-white/2 leading-none pointer-events-none service-number">
                                     {index + 1}
                                 </div>
 
                                 {/* Icon with Glow */}
-                                <div className="relative mb-6 w-16 h-16 flex items-center justify-center">
+                                <div className="relative mb-4 sm:mb-6 w-12 h-12 sm:w-16 sm:h-16 flex items-center justify-center">
                                     <div className="absolute inset-0 bg-lime-acid/20 blur-xl group-hover:bg-lime-acid/40 transition-all duration-500" />
-                                    <service.icon className="w-10 h-10 text-lime-acid relative z-10 group-hover:scale-110 transition-transform duration-300" />
+                                    <service.icon className="w-8 h-8 sm:w-10 sm:h-10 text-lime-acid relative z-10 group-hover:scale-110 transition-transform duration-300" />
                                 </div>
 
                                 {/* Content */}
                                 <div className="relative z-10">
-                                    <div className="flex items-center gap-3 mb-4">
-                                        <h3 className="font-display text-2xl md:text-3xl font-bold text-white tracking-[-0.01em] group-hover:text-lime-acid transition-colors duration-300">
+                                    <div className="flex items-center gap-3 mb-3 sm:mb-4">
+                                        <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-white tracking-[-0.01em] group-hover:text-lime-acid transition-colors duration-300">
                                             {service.title}
                                         </h3>
                                     </div>
                                     
-                                    <p className="font-body text-base text-gray-400 leading-relaxed mb-6 group-hover:text-gray-300 transition-colors">
+                                    <p className="font-body text-sm sm:text-base text-gray-400 leading-relaxed mb-4 sm:mb-6 group-hover:text-gray-300 transition-colors">
                                         {service.desc}
                                     </p>
 
@@ -141,7 +141,7 @@ export default function Services() {
                                         {service.tags.map((tag, i) => (
                                             <span 
                                                 key={i}
-                                                className="px-3 py-1 bg-black/40 border border-lime-acid/20 font-mono text-xs text-lime-acid/70 group-hover:border-lime-acid/40 group-hover:text-lime-acid transition-all"
+                                                className="px-2 sm:px-3 py-1 bg-black/40 border border-lime-acid/20 font-mono text-[10px] sm:text-xs text-lime-acid/70 group-hover:border-lime-acid/40 group-hover:text-lime-acid transition-all"
                                             >
                                                 {tag}
                                             </span>
@@ -157,24 +157,24 @@ export default function Services() {
                 </div>
 
                 {/* CTA Section */}
-                <div className="relative mt-24 border-2 border-lime-acid/20 bg-cement p-12 md:p-16 text-center overflow-hidden group hover:border-lime-acid/40 transition-all">
+                <div className="relative mt-16 sm:mt-24 border-2 border-lime-acid/20 bg-cement p-8 sm:p-12 md:p-16 text-center overflow-hidden group hover:border-lime-acid/40 transition-all">
                     {/* Background Pulse */}
                     <div className="absolute inset-0 bg-lime-acid/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     
                     <div className="relative z-10">
-                        <h3 className="font-display text-3xl md:text-4xl font-bold text-white mb-4 tracking-[-0.01em]">
+                        <h3 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4 tracking-[-0.01em]">
                             READY TO BUILD?
                         </h3>
-                        <p className="font-mono text-sm text-gray-400 mb-8 tracking-wider">
+                        <p className="font-mono text-xs sm:text-sm text-gray-400 mb-6 sm:mb-8 tracking-wider">
                             Let's create something extraordinary together
                         </p>
                         <a 
                             href="#contact" 
-                            className="inline-flex items-center gap-3 px-10 py-5 bg-lime-acid text-black font-mono text-sm font-bold hover:bg-white transition-all duration-300 hover-trigger group/btn"
+                            className="inline-flex items-center gap-2 sm:gap-3 px-8 sm:px-10 py-4 sm:py-5 bg-lime-acid text-black font-mono text-xs sm:text-sm font-bold hover:bg-white transition-all duration-300 hover-trigger group/btn"
                             data-cursor="INITIATE"
                         >
                             <span>START PROJECT</span>
-                            <Zap className="w-4 h-4 group-hover/btn:rotate-12 transition-transform" />
+                            <Zap className="w-3 h-3 sm:w-4 sm:h-4 group-hover/btn:rotate-12 transition-transform" />
                         </a>
                     </div>
                 </div>

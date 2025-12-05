@@ -146,19 +146,19 @@ export default function Hero() {
                     </div>
 
                     {/* Description and Metrics - Flexbox Layout */}
-                    <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12">
+                    <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 lg:gap-8 mb-8 lg:mb-12">
                         
                         {/* Description with Code Style */}
                         <div className="flex-1 max-w-2xl">
-                            <div className="font-mono text-sm text-gray-600 mb-3">{'// System Output:'}</div>
-                            <p className="font-body text-lg md:text-xl text-gray-300 leading-relaxed">
+                            <div className="font-mono text-xs sm:text-sm text-gray-600 mb-2 sm:mb-3">{'// System Output:'}</div>
+                            <p className="font-body text-base sm:text-lg md:text-xl text-gray-300 leading-relaxed">
                                 Bridging the gap between <span className="text-lime-acid font-bold">design and development</span>. 
                                 I don't just hand off designs—<span className="text-lime-acid font-bold">I bring them to life</span> with code.
                             </p>
                         </div>
 
                         {/* Live Metrics */}
-                        <div className="flex gap-8 lg:gap-10">
+                        <div className="flex gap-4 sm:gap-6 lg:gap-10">
                             <div className="relative px-3 py-2">
                                 <div className="absolute -top-1.5 -left-1.5 w-4 h-4 border-l-2 border-t-2 border-lime-acid" />
                                 <div className="font-mono text-xs text-gray-600 mb-1">UPTIME</div>
@@ -184,22 +184,22 @@ export default function Hero() {
                     </div>
 
                     {/* CTAs with Terminal Style */}
-                    <div className="flex flex-col sm:flex-row gap-4">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                         <a
                             href="#contact"
-                            className="group relative px-8 py-4 bg-lime-acid text-black font-mono text-sm font-bold overflow-hidden hover-trigger"
+                            className="group relative px-6 sm:px-8 py-3 sm:py-4 bg-lime-acid text-black font-mono text-xs sm:text-sm font-bold overflow-hidden hover-trigger text-center"
                             data-cursor="EXECUTE"
                         >
-                            <span className="relative z-10 flex items-center gap-2">
+                            <span className="relative z-10 flex items-center justify-center gap-2">
                                 {'> EXECUTE_PROJECT()'}
-                                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                                <ArrowUpRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                             </span>
                             <div className="absolute inset-0 bg-white transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
                         </a>
                         
                         <a
                             href="#work"
-                            className="px-8 py-4 border-2 border-lime-acid/30 text-lime-acid font-mono text-sm font-bold hover:bg-lime-acid/10 transition-all hover-trigger"
+                            className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-lime-acid/30 text-lime-acid font-mono text-xs sm:text-sm font-bold hover:bg-lime-acid/10 transition-all hover-trigger text-center"
                             data-cursor="SCAN"
                         >
                             {'> VIEW_PORTFOLIO()'}
@@ -209,8 +209,8 @@ export default function Hero() {
                 </div>
             </div>
 
-            {/* Mouse Position Tracker */}
-            <div className="fixed top-8 right-8 font-mono text-xs text-lime-acid/50 z-50 mix-blend-difference">
+            {/* Mouse Position Tracker - Hidden on mobile */}
+            <div className="hidden lg:block fixed top-8 right-8 font-mono text-xs text-lime-acid/50 z-50 mix-blend-difference">
                 X:{mousePos.x.toString().padStart(4, '0')} Y:{mousePos.y.toString().padStart(4, '0')}
             </div>
 

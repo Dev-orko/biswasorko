@@ -107,11 +107,11 @@ export default function Navigation() {
                     >
                         <div className="relative">
                             {/* Main text with gradient effect */}
-                            <div className="font-display text-2xl font-bold tracking-tight relative">
+                            <div className="font-display text-lg sm:text-xl md:text-2xl font-bold tracking-tight relative">
                                 <span className="text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-lime-acid group-hover:to-white transition-all duration-500">
                                     ORKO
                                 </span>
-                                <span className="ml-2 text-lime-acid group-hover:text-white transition-colors duration-500">
+                                <span className="ml-1 sm:ml-2 text-lime-acid group-hover:text-white transition-colors duration-500">
                                     BISWAS
                                 </span>
                             </div>
@@ -121,7 +121,7 @@ export default function Navigation() {
                             
                             {/* Glitch effect overlay */}
                             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div className="font-display text-2xl font-bold tracking-tight text-lime-acid/20 translate-x-0.5 -translate-y-0.5">
+                                <div className="font-display text-lg sm:text-xl md:text-2xl font-bold tracking-tight text-lime-acid/20 translate-x-0.5 -translate-y-0.5">
                                     ORKO BISWAS
                                 </div>
                             </div>
@@ -141,7 +141,7 @@ export default function Navigation() {
                             <MagneticButton>
                                 <button
                                     onClick={toggleMenu}
-                                    className="font-mono text-xs border border-white/20 px-6 py-2 hover:bg-lime-acid hover:text-black hover:border-lime-acid transition-all uppercase hover-trigger tracking-widest text-white"
+                                    className="font-mono text-[10px] sm:text-xs border border-white/20 px-4 sm:px-6 py-2 sm:py-2.5 hover:bg-lime-acid hover:text-black hover:border-lime-acid transition-all uppercase hover-trigger tracking-widest text-white"
                                     data-cursor="OPEN"
                                 >
                                     Menu

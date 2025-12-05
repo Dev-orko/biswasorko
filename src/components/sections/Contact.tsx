@@ -111,11 +111,11 @@ export default function Contact() {
             <div className="relative z-10 max-w-[1600px] mx-auto px-6 md:px-12 py-32">
                 
                 {/* Header */}
-                <div className="contact-header text-center mb-16">
-                    <div className="inline-block mb-6 px-4 py-2 border border-lime-acid/30 font-mono text-xs text-lime-acid tracking-[0.3em]">
+                <div className="contact-header text-center mb-12 sm:mb-16">
+                    <div className="inline-block mb-4 sm:mb-6 px-3 sm:px-4 py-1.5 sm:py-2 border border-lime-acid/30 font-mono text-[10px] sm:text-xs text-lime-acid tracking-[0.3em]">
                         GET IN TOUCH
                     </div>
-                    <h2 className="font-display text-6xl md:text-7xl lg:text-8xl font-bold tracking-[-0.02em] leading-[0.9] mb-6">
+                    <h2 className="font-display text-4xl sm:text-5xl md:text-7xl lg:text-8xl font-bold tracking-[-0.02em] leading-[0.9] mb-4 sm:mb-6">
                         <span className="block text-white">LET'S BUILD</span>
                         <span className="block text-lime-acid relative">
                             SOMETHING
@@ -123,39 +123,39 @@ export default function Contact() {
                         </span>
                         <span className="block text-white">AMAZING</span>
                     </h2>
-                    <p className="font-body text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+                    <p className="font-body text-base sm:text-lg md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed px-4">
                         Looking for someone who can handle the entire product lifecycle—from concept to deployment? Let's talk about bringing your vision to life.
                     </p>
                 </div>
 
                 {/* Social Links Section */}
-                <div className="contact-card bg-black/60 backdrop-blur-sm border-2 border-lime-acid/20 p-12 mb-16">
-                    <div className="text-center mb-8">
-                        <h3 className="font-display text-3xl font-bold text-white mb-3">
+                <div className="contact-card bg-black/60 backdrop-blur-sm border-2 border-lime-acid/20 p-6 sm:p-8 lg:p-12 mb-12 sm:mb-16">
+                    <div className="text-center mb-6 sm:mb-8">
+                        <h3 className="font-display text-2xl sm:text-3xl font-bold text-white mb-2 sm:mb-3">
                             FOLLOW MY JOURNEY
                         </h3>
-                        <p className="font-mono text-sm text-lime-acid/60 tracking-wider font-bold">
+                        <p className="font-mono text-xs sm:text-sm text-lime-acid/60 tracking-wider font-bold">
                             Connect with me on social media
                         </p>
                     </div>
                     
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
                         {socialLinks.map((social, index) => {
                             const Icon = social.icon;
                             return (
                                 <a
                                     key={index}
                                     href={social.href}
-                                    className="group relative bg-black/40 border border-lime-acid/30 p-6 hover:border-lime-acid/60 hover:bg-lime-acid/10 transition-all hover-trigger"
+                                    className="group relative bg-black/40 border border-lime-acid/30 p-4 sm:p-6 hover:border-lime-acid/60 hover:bg-lime-acid/10 transition-all hover-trigger"
                                     data-cursor="FOLLOW"
                                 >
-                                    <div className="flex flex-col items-center gap-3">
-                                        <Icon className="w-6 h-6 text-lime-acid group-hover:scale-110 transition-transform" />
+                                    <div className="flex flex-col items-center gap-2 sm:gap-3">
+                                        <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-lime-acid group-hover:scale-110 transition-transform" />
                                         <div className="text-center">
-                                            <div className="font-display text-sm font-bold text-white mb-1">
+                                            <div className="font-display text-xs sm:text-sm font-bold text-white mb-1">
                                                 {social.label}
                                             </div>
-                                            <div className="font-mono text-xs text-gray-600 group-hover:text-lime-acid transition-colors">
+                                            <div className="font-mono text-[10px] sm:text-xs text-gray-600 group-hover:text-lime-acid transition-colors break-all">
                                                 {social.tag}
                                             </div>
                                         </div>

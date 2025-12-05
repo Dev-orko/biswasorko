@@ -56,15 +56,15 @@ export default function Preloader() {
             className="fixed inset-0 bg-void z-10000 flex flex-col justify-center items-center"
             id="preloader"
         >
-            <div className="text-center">
-                <h1 className="font-display text-4xl md:text-8xl font-bold text-mist mb-4 overflow-hidden flex flex-col md:block">
+            <div className="text-center px-4">
+                <h1 className="font-display text-3xl sm:text-4xl md:text-6xl lg:text-8xl font-bold text-mist mb-3 sm:mb-4 overflow-hidden flex flex-col md:block">
                     <span className="inline-block translate-y-full reveal-title">ORKO</span>
                     <span className="inline-block translate-y-full reveal-title text-lime-acid md:ml-4">BISWAS</span>
                 </h1>
-                <div className="font-mono text-xs text-gray-500 mt-4">[ LOADING ARTIFACTS ]</div>
+                <div className="font-mono text-[10px] sm:text-xs text-gray-500 mt-3 sm:mt-4">[ LOADING ARTIFACTS ]</div>
                 
                 {/* Progress Line */}
-                <div className="mt-8 w-64 md:w-96 mx-auto">
+                <div className="mt-6 sm:mt-8 w-48 sm:w-64 md:w-96 mx-auto">
                     <div className="h-px bg-white/10 relative overflow-hidden">
                         <div
                             ref={progressRef}
@@ -72,7 +72,7 @@ export default function Preloader() {
                             style={{ transform: 'scaleX(0)' }}
                         />
                     </div>
-                    <div className="flex justify-between items-center mt-2 font-mono text-[10px] text-gray-600">
+                    <div className="flex justify-between items-center mt-2 font-mono text-[9px] sm:text-[10px] text-gray-600">
                         <span>00</span>
                         <span className="text-lime-acid">{Math.min(Math.round(progress), 100)}%</span>
                         <span>100</span>
