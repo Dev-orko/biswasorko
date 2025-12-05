@@ -10,6 +10,8 @@ import { LuArrowDownRight } from "react-icons/lu";
 export default function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
     const [time, setTime] = useState<string>("");
+    const [visitorTime, setVisitorTime] = useState<string>("");
+    const [visitorLocation, setVisitorLocation] = useState<string>("LOADING...");
     const [mounted, setMounted] = useState(false);
     const menuOverlayRef = useRef<HTMLDivElement>(null);
 
@@ -22,13 +24,42 @@ export default function Navigation() {
 
     useEffect(() => {
         setMounted(true);
-        const updateTime = () => {
+        
+        // Dhaka time (Bangladesh Standard Time - GMT+6)
+        const updateDhakaTime = () => {
             const now = new Date();
-            setTime(now.toLocaleTimeString("en-US", { hour12: false }));
+            const dhakaTime = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Dhaka' }));
+            setTime(dhakaTime.toLocaleTimeString("en-US", { hour12: false }));
         };
         
-        updateTime(); // Set initial time
-        const interval = setInterval(updateTime, 1000);
+        // Visitor's local time
+        const updateVisitorTime = () => {
+            const now = new Date();
+            setVisitorTime(now.toLocaleTimeString("en-US", { hour12: false }));
+        };
+        
+        // Get visitor's location
+        const getVisitorLocation = async () => {
+            try {
+                const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                const locationParts = timezone.split('/');
+                const city = locationParts[locationParts.length - 1].replace(/_/g, ' ').toUpperCase();
+                const region = locationParts.length > 1 ? locationParts[0].substring(0, 2).toUpperCase() : '';
+                setVisitorLocation(`${city}${region ? ', ' + region : ''}`);
+            } catch (error) {
+                setVisitorLocation('LOCAL');
+            }
+        };
+        
+        updateDhakaTime();
+        updateVisitorTime();
+        getVisitorLocation();
+        
+        const interval = setInterval(() => {
+            updateDhakaTime();
+            updateVisitorTime();
+        }, 1000);
+        
         return () => clearInterval(interval);
     }, []);
 
@@ -69,8 +100,13 @@ export default function Navigation() {
                     </Link>
                     
                     <div className="flex gap-8 items-center">
-                        <div className="hidden md:block font-mono text-xs text-gray-400">
-                            DHAKA, BD <span className="text-white ml-2">{mounted ? time : "--:--:--"}</span>
+                        <div className="hidden md:flex gap-6 font-mono text-xs">
+                            <div className="text-gray-400">
+                                DHAKA, BD <span className="text-white ml-2">{mounted ? time : "--:--:--"}</span>
+                            </div>
+                            <div className="text-gray-400 border-l border-white/20 pl-6">
+                                {mounted ? visitorLocation : "YOUR LOCATION"} <span className="text-lime-acid ml-2">{mounted ? visitorTime : "--:--:--"}</span>
+                            </div>
                         </div>
                         <div className="relative group">
                             <MagneticButton>
