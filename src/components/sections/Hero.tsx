@@ -91,12 +91,12 @@ export default function Hero() {
         <section
             ref={containerRef}
             id="home"
-            className="relative min-h-screen flex items-center overflow-hidden bg-void pt-20"
+            className="relative h-screen flex items-center overflow-hidden bg-void"
         >
             {/* Simple Grid Background */}
             <div className="absolute inset-0 bg-grid opacity-[0.02]" />
 
-            <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 h-screen flex items-center">
+            <div className="relative z-10 w-full max-w-[1400px] mx-auto px-6 md:px-12 mt-20">
                 <div className="w-full">
                     
                     {/* Terminal-style Header */}
@@ -145,11 +145,11 @@ export default function Hero() {
                         </div>
                     </div>
 
-                    {/* Two Column Layout for Description and Metrics */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-12 max-w-5xl">
+                    {/* Description and Metrics - Flexbox Layout */}
+                    <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12">
                         
                         {/* Description with Code Style */}
-                        <div>
+                        <div className="flex-1 max-w-2xl">
                             <div className="font-mono text-sm text-gray-600 mb-3">{'// System Output:'}</div>
                             <p className="font-body text-lg md:text-xl text-gray-300 leading-relaxed">
                                 Bridging the gap between <span className="text-lime-acid font-bold">design and development</span>. 
@@ -158,27 +158,27 @@ export default function Hero() {
                         </div>
 
                         {/* Live Metrics */}
-                        <div className="grid grid-cols-3 gap-6">
-                            <div className="relative">
-                                <div className="absolute -top-2 -left-2 w-3 h-3 border-l-2 border-t-2 border-lime-acid" />
+                        <div className="flex gap-8 lg:gap-10">
+                            <div className="relative px-3 py-2">
+                                <div className="absolute -top-1.5 -left-1.5 w-4 h-4 border-l-2 border-t-2 border-lime-acid" />
                                 <div className="font-mono text-xs text-gray-600 mb-1">UPTIME</div>
                                 <div className="font-display text-3xl font-bold text-lime-acid">5Y+</div>
-                                <div className="absolute -bottom-2 -right-2 w-3 h-3 border-r-2 border-b-2 border-lime-acid" />
+                                <div className="absolute -bottom-1.5 -right-1.5 w-4 h-4 border-r-2 border-b-2 border-lime-acid" />
                             </div>
-                            <div className="relative">
-                                <div className="absolute -top-2 -left-2 w-3 h-3 border-l-2 border-t-2 border-lime-acid" />
+                            <div className="relative px-3 py-2">
+                                <div className="absolute -top-1.5 -left-1.5 w-4 h-4 border-l-2 border-t-2 border-lime-acid" />
                                 <div className="font-mono text-xs text-gray-600 mb-1">BUILDS</div>
                                 <div className="font-display text-3xl font-bold text-lime-acid">50+</div>
-                                <div className="absolute -bottom-2 -right-2 w-3 h-3 border-r-2 border-b-2 border-lime-acid" />
+                                <div className="absolute -bottom-1.5 -right-1.5 w-4 h-4 border-r-2 border-b-2 border-lime-acid" />
                             </div>
-                            <div className="relative">
-                                <div className="absolute -top-2 -left-2 w-3 h-3 border-l-2 border-t-2 border-lime-acid" />
+                            <div className="relative px-3 py-2">
+                                <div className="absolute -top-1.5 -left-1.5 w-4 h-4 border-l-2 border-t-2 border-lime-acid" />
                                 <div className="font-mono text-xs text-gray-600 mb-1">STATUS</div>
                                 <div className="flex items-center gap-2">
                                     <div className="w-2 h-2 bg-lime-acid rounded-full animate-pulse" />
                                     <span className="font-mono text-sm font-bold text-lime-acid">LIVE</span>
                                 </div>
-                                <div className="absolute -bottom-2 -right-2 w-3 h-3 border-r-2 border-b-2 border-lime-acid" />
+                                <div className="absolute -bottom-1.5 -right-1.5 w-4 h-4 border-r-2 border-b-2 border-lime-acid" />
                             </div>
                         </div>
                     </div>

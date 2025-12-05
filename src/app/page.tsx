@@ -11,14 +11,16 @@ export default function Home() {
   return (
     <>
       <Preloader />
-      <Layout>
-        <Hero />
-        <Ticker />
-        <Stack />
-        <Work />
-        <Services />
-        <Contact />
-      </Layout>
+      <div className="relative z-10">
+        <Layout>
+          <Hero />
+          <Ticker />
+          <Stack />
+          <Work />
+          <Services />
+          <Contact />
+        </Layout>
+      </div>
     </>
   );
 }

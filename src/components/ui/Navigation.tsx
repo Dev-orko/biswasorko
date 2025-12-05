@@ -95,9 +95,38 @@ export default function Navigation() {
             {/* Glassmorphism Navbar */}
             <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/30 border-b border-white/10">
                 <div className="max-w-[1600px] mx-auto px-6 md:px-12 py-6 flex items-center justify-between">
-                    <Link href="/" className="font-display font-bold text-xl hover-trigger tracking-tight text-white" data-cursor="HOME">
-                        ORKO BISWAS
-                    </Link>
+                    <button
+                        onClick={() => {
+                            // Scroll to top immediately without smooth behavior for instant effect
+                            window.scrollTo(0, 0);
+                            // Reload the page - it will start from top
+                            window.location.href = '/';
+                        }}
+                        className="hover-trigger group relative cursor-pointer"
+                        data-cursor="HOME"
+                    >
+                        <div className="relative">
+                            {/* Main text with gradient effect */}
+                            <div className="font-display text-2xl font-bold tracking-tight relative">
+                                <span className="text-white group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-linear-to-r group-hover:from-lime-acid group-hover:to-white transition-all duration-500">
+                                    ORKO
+                                </span>
+                                <span className="ml-2 text-lime-acid group-hover:text-white transition-colors duration-500">
+                                    BISWAS
+                                </span>
+                            </div>
+                            
+                            {/* Animated underline */}
+                            <div className="h-0.5 w-0 group-hover:w-full bg-lime-acid transition-all duration-500 ease-out" />
+                            
+                            {/* Glitch effect overlay */}
+                            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="font-display text-2xl font-bold tracking-tight text-lime-acid/20 translate-x-0.5 -translate-y-0.5">
+                                    ORKO BISWAS
+                                </div>
+                            </div>
+                        </div>
+                    </button>
                     
                     <div className="flex gap-8 items-center">
                         <div className="hidden md:flex gap-6 font-mono text-xs">

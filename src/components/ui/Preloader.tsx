@@ -1,36 +1,59 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
 export default function Preloader() {
     const preloaderRef = useRef<HTMLDivElement>(null);
+    const progressRef = useRef<HTMLDivElement>(null);
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
+        // Simulate loading progress
+        const progressInterval = setInterval(() => {
+            setProgress((prev) => {
+                if (prev >= 100) {
+                    clearInterval(progressInterval);
+                    return 100;
+                }
+                return prev + Math.random() * 15;
+            });
+        }, 100);
+
         const tl = gsap.timeline();
+
+        // Animate progress bar width
+        tl.to(progressRef.current, {
+            scaleX: 1,
+            duration: 2,
+            ease: "power2.inOut",
+        });
 
         tl.to(".reveal-title", {
             y: 0,
             duration: 1.5,
             ease: "power4.out",
             stagger: 0.2,
-        }).to(preloaderRef.current, {
+        }, "-=1.5").to(preloaderRef.current, {
             yPercent: -100,
             duration: 1,
             ease: "power4.inOut",
-            delay: 0.5,
+            delay: 0.3,
             onComplete: () => {
                 if (preloaderRef.current) {
                     preloaderRef.current.style.display = "none";
                 }
+                clearInterval(progressInterval);
             },
         });
+
+        return () => clearInterval(progressInterval);
     }, []);
 
     return (
         <div
             ref={preloaderRef}
-            className="fixed inset-0 bg-void z-10000 flex justify-center items-center"
+            className="fixed inset-0 bg-void z-10000 flex flex-col justify-center items-center"
             id="preloader"
         >
             <div className="text-center">
@@ -39,6 +62,22 @@ export default function Preloader() {
                     <span className="inline-block translate-y-full reveal-title text-lime-acid md:ml-4">BISWAS</span>
                 </h1>
                 <div className="font-mono text-xs text-gray-500 mt-4">[ LOADING ARTIFACTS ]</div>
+                
+                {/* Progress Line */}
+                <div className="mt-8 w-64 md:w-96 mx-auto">
+                    <div className="h-px bg-white/10 relative overflow-hidden">
+                        <div
+                            ref={progressRef}
+                            className="absolute inset-0 bg-lime-acid origin-left"
+                            style={{ transform: 'scaleX(0)' }}
+                        />
+                    </div>
+                    <div className="flex justify-between items-center mt-2 font-mono text-[10px] text-gray-600">
+                        <span>00</span>
+                        <span className="text-lime-acid">{Math.min(Math.round(progress), 100)}%</span>
+                        <span>100</span>
+                    </div>
+                </div>
             </div>
         </div>
     );

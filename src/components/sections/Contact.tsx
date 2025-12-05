@@ -2,7 +2,8 @@
 
 import { useEffect, useState, useRef } from "react";
 import Link from "next/link";
-import { Linkedin, Twitter, Instagram, Github, Mail, Calendar, MapPin, Clock, Zap, Send, Phone } from "lucide-react";
+import { Linkedin, Instagram, Github, Mail, Calendar, MapPin, Clock, Zap, Send, Phone } from "lucide-react";
+import { FaBehance } from "react-icons/fa";
 import gsap from "gsap";
 
 export default function Contact() {
@@ -83,10 +84,10 @@ export default function Contact() {
     ];
 
     const socialLinks = [
-        { icon: Linkedin, label: "LinkedIn", href: "#", tag: "linkedin.com/in/orkobiswas" },
-        { icon: Twitter, label: "Twitter", href: "#", tag: "@orkobiswas" },
+        { icon: Linkedin, label: "LinkedIn", href: "https://www.linkedin.com/in/orkobiswas/", tag: "linkedin.com/in/orkobiswas" },
+        { icon: FaBehance, label: "Behance", href: "#", tag: "@orkobiswas" },
         { icon: Instagram, label: "Instagram", href: "#", tag: "@orko.dev" },
-        { icon: Github, label: "GitHub", href: "#", tag: "github.com/Dev-orko" },
+        { icon: Github, label: "GitHub", href: "https://github.com/Dev-orko", tag: "github.com/Dev-orko" },
     ];
 
     const stats = [

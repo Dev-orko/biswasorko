@@ -63,6 +63,21 @@ export default function Stack() {
           start: 'top 70%',
         },
       });
+
+      // Infinite vertical carousel animation
+      const track = document.querySelector('.experience-track');
+      if (track) {
+        const items = document.querySelectorAll('.experience-item');
+        const itemHeight = items[0]?.clientHeight || 0;
+        const totalHeight = itemHeight * 5; // 5 items in original set
+
+        gsap.to(track, {
+          y: -totalHeight,
+          duration: 20,
+          ease: 'none',
+          repeat: -1,
+        });
+      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -83,7 +98,7 @@ export default function Stack() {
           <p className="font-mono text-[10px] text-lime-acid/70 tracking-widest">// TECHNICAL ARSENAL</p>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-8 mb-16">
           {stackCategories.map((category, index) => {
             const Icon = category.icon;
             return (
@@ -118,6 +133,71 @@ export default function Stack() {
               </div>
             );
           })}
+        </div>
+
+        {/* Professional Experience */}
+        <div className="border-t border-white/10 pt-12">
+          <div className="flex items-center gap-3 mb-8">
+            <Sparkles className="w-6 h-6 text-lime-acid" />
+            <h3 className="font-display text-3xl md:text-4xl font-bold text-white uppercase tracking-tight">Professional Experience</h3>
+          </div>
+          <p className="font-mono text-[10px] text-lime-acid/70 tracking-widest mb-8">// CAREER JOURNEY</p>
+          
+          <div className="experience-carousel relative h-[400px] overflow-hidden">
+            <div className="experience-track flex flex-col gap-0">
+              {/* First set */}
+              {[
+                { company: 'Dhaka Bank Limited', period: '2017-2022' },
+                { company: 'Sam Overlays', period: '2022-2023' },
+                { company: 'UI STREAMS', period: '2023-2024' },
+                { company: 'Betopia Group', period: '2025-Running' },
+                { company: 'Join Venture AI', period: '2025-Running' },
+              ].map((exp, index) => (
+                <div
+                  key={`exp-1-${index}`}
+                  className="experience-item flex items-center justify-between py-8 border-b border-white/5 hover:border-lime-acid/30 transition-all group hover-trigger"
+                  data-cursor="VIEW"
+                >
+                  <div className="flex-1">
+                    <h3 className="font-display text-2xl md:text-3xl font-bold text-white group-hover:text-lime-acid transition-colors">
+                      {exp.company}
+                    </h3>
+                  </div>
+                  <div className="text-right">
+                    <span className="font-mono text-sm text-lime-acid group-hover:text-white transition-colors">
+                      {exp.period}
+                    </span>
+                  </div>
+                </div>
+              ))}
+              
+              {/* Second set (duplicate for seamless loop) */}
+              {[
+                { company: 'Dhaka Bank Limited', period: '2017-2022' },
+                { company: 'Sam Overlays', period: '2022-2023' },
+                { company: 'UI STREAMS', period: '2023-2024' },
+                { company: 'Betopia Group', period: '2025-Running' },
+                { company: 'Join Venture AI', period: '2025-Running' },
+              ].map((exp, index) => (
+                <div
+                  key={`exp-2-${index}`}
+                  className="experience-item flex items-center justify-between py-8 border-b border-white/5 hover:border-lime-acid/30 transition-all group hover-trigger"
+                  data-cursor="VIEW"
+                >
+                  <div className="flex-1">
+                    <h3 className="font-display text-2xl md:text-3xl font-bold text-white group-hover:text-lime-acid transition-colors">
+                      {exp.company}
+                    </h3>
+                  </div>
+                  <div className="text-right">
+                    <span className="font-mono text-sm text-lime-acid group-hover:text-white transition-colors">
+                      {exp.period}
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 

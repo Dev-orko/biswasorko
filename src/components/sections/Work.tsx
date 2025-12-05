@@ -12,9 +12,11 @@ if (typeof window !== 'undefined') {
 export default function Work() {
     const sectionRef = useRef<HTMLElement>(null);
     const [activeFilter, setActiveFilter] = useState<'ALL' | 'WEBSITE' | 'MOBILE' | 'GRAPHIC' | 'MOTION'>('ALL');
+    const [selectedProject, setSelectedProject] = useState<number | null>(null);
+    const videoRefs = useRef<{ [key: number]: HTMLVideoElement | null }>({});
 
     const projects = [
-        // Website Projects
+        // Mixed items for ALL view
         {
             id: 1,
             title: "NEON HORIZON",
@@ -25,6 +27,33 @@ export default function Work() {
             image: "https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2600&auto=format&fit=crop",
         },
         {
+            id: 8,
+            title: "FITNESS TRACKER",
+            category: "MOBILE",
+            year: "2024",
+            desc: "Health and fitness app with workout tracking and nutrition planning",
+            tags: ["Flutter", "Firebase", "Dart"],
+            image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=2574&auto=format&fit=crop",
+        },
+        {
+            id: 15,
+            title: "BRAND IDENTITY",
+            category: "GRAPHIC",
+            year: "2024",
+            desc: "Complete brand identity with logo, color palette, and style guide",
+            tags: ["Illustrator", "Figma"],
+            image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2671&auto=format&fit=crop",
+        },
+        {
+            id: 22,
+            title: "LOGO REVEAL",
+            category: "MOTION",
+            year: "2024",
+            desc: "Dynamic logo animation with particle effects and smooth transitions",
+            tags: ["After Effects", "Motion"],
+            image: "https://images.unsplash.com/photo-1611162616475-46b635cb6868?q=80&w=2574&auto=format&fit=crop",
+        },
+        {
             id: 2,
             title: "CYBER PORTAL",
             category: "WEBSITE",
@@ -33,6 +62,26 @@ export default function Work() {
             tags: ["Next.js", "Stripe", "Tailwind"],
             image: "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?q=80&w=2574&auto=format&fit=crop",
         },
+        {
+            id: 10,
+            title: "SOCIAL CONNECT",
+            category: "MOBILE",
+            year: "2024",
+            desc: "Social networking app with real-time chat and media sharing",
+            tags: ["Flutter", "Firebase"],
+            image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop",
+        },
+        {
+            id: 17,
+            title: "PACKAGING DESIGN",
+            category: "GRAPHIC",
+            year: "2023",
+            desc: "Product packaging design for premium skincare brand",
+            tags: ["Illustrator", "3D Mockup"],
+            image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=2670&auto=format&fit=crop",
+        },
+
+        // Additional Website Projects
         {
             id: 3,
             title: "VOID SYSTEM",
@@ -79,16 +128,7 @@ export default function Work() {
             image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?q=80&w=2670&auto=format&fit=crop",
         },
 
-        // Mobile App Projects
-        {
-            id: 8,
-            title: "FITNESS TRACKER",
-            category: "MOBILE",
-            year: "2024",
-            desc: "Health and fitness app with workout tracking and nutrition planning",
-            tags: ["Flutter", "Firebase", "Dart"],
-            image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?q=80&w=2574&auto=format&fit=crop",
-        },
+        // Additional Mobile App Projects
         {
             id: 9,
             title: "FINTECH APP",
@@ -97,15 +137,6 @@ export default function Work() {
             desc: "Mobile banking app with secure transactions and budget management",
             tags: ["React Native", "Node.js"],
             image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?q=80&w=2670&auto=format&fit=crop",
-        },
-        {
-            id: 10,
-            title: "SOCIAL CONNECT",
-            category: "MOBILE",
-            year: "2024",
-            desc: "Social networking app with real-time chat and media sharing",
-            tags: ["Flutter", "Firebase"],
-            image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2574&auto=format&fit=crop",
         },
         {
             id: 11,
@@ -144,16 +175,7 @@ export default function Work() {
             image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?q=80&w=2635&auto=format&fit=crop",
         },
 
-        // Graphic Design Projects
-        {
-            id: 15,
-            title: "BRAND IDENTITY",
-            category: "GRAPHIC",
-            year: "2024",
-            desc: "Complete brand identity with logo, color palette, and style guide",
-            tags: ["Illustrator", "Figma"],
-            image: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=2671&auto=format&fit=crop",
-        },
+        // Additional Graphic Design Projects
         {
             id: 16,
             title: "POSTER SERIES",
@@ -162,15 +184,6 @@ export default function Work() {
             desc: "Event poster series with bold typography and vibrant colors",
             tags: ["Photoshop", "Illustrator"],
             image: "https://images.unsplash.com/photo-1634942537034-2531766767d1?q=80&w=2670&auto=format&fit=crop",
-        },
-        {
-            id: 17,
-            title: "PACKAGING DESIGN",
-            category: "GRAPHIC",
-            year: "2023",
-            desc: "Product packaging design for premium skincare brand",
-            tags: ["Illustrator", "3D Mockup"],
-            image: "https://images.unsplash.com/photo-1559056199-641a0ac8b55e?q=80&w=2670&auto=format&fit=crop",
         },
         {
             id: 18,
@@ -210,15 +223,6 @@ export default function Work() {
         },
 
         // Motion Animation Projects
-        {
-            id: 22,
-            title: "BRAND ANIMATION",
-            category: "MOTION",
-            year: "2024",
-            desc: "Logo animation with kinetic typography and particle effects",
-            tags: ["After Effects", "Cinema 4D"],
-            image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?q=80&w=2670&auto=format&fit=crop",
-        },
         {
             id: 23,
             title: "PRODUCT PROMO",
@@ -276,8 +280,8 @@ export default function Work() {
     ];
 
     const filteredProjects = activeFilter === 'ALL' 
-        ? projects 
-        : projects.filter(p => p.category === activeFilter);
+        ? projects.slice(0, 7) // Show first 7 mixed items from all categories
+        : projects.filter(project => project.category === activeFilter).slice(0, 7); // Show max 7 items per category
 
     useEffect(() => {
         const ctx = gsap.context(() => {
@@ -305,16 +309,17 @@ export default function Work() {
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
         
-        const rotateX = ((y - centerY) / centerY) * -8;
-        const rotateY = ((x - centerX) / centerX) * 8;
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
         
         gsap.to(cardRef, {
             rotationX: rotateX,
             rotationY: rotateY,
-            scale: 1.02,
-            duration: 0.3,
-            ease: 'power2.out',
+            scale: 1.01,
+            duration: 0.6,
+            ease: 'power3.out',
             transformPerspective: 1000,
+            overwrite: 'auto',
         });
     };
 
@@ -323,9 +328,33 @@ export default function Work() {
             rotationX: 0,
             rotationY: 0,
             scale: 1,
-            duration: 0.5,
-            ease: 'power2.out',
+            duration: 0.8,
+            ease: 'power3.out',
+            overwrite: 'auto',
         });
+    };
+
+    const handleMouseEnter = (projectId: number) => {
+        const video = videoRefs.current[projectId];
+        if (video) {
+            video.play().catch(err => console.log('Video play failed:', err));
+        }
+    };
+
+    const handleMouseLeaveVideo = (projectId: number) => {
+        const video = videoRefs.current[projectId];
+        if (video) {
+            video.pause();
+            video.currentTime = 0;
+        }
+    };
+
+    const handleProjectClick = (projectId: number) => {
+        setSelectedProject(projectId);
+    };
+
+    const closeModal = () => {
+        setSelectedProject(null);
     };
 
     return (
@@ -401,18 +430,28 @@ export default function Work() {
                         return (
                             <div
                                 key={project.id}
-                                className={`work-card group relative ${spanClass} ${rowSpan} bg-cement border border-white/10 overflow-hidden hover-trigger`}
+                                className={`work-card group relative ${spanClass} ${rowSpan} bg-cement border border-white/10 overflow-hidden hover-trigger cursor-pointer`}
                                 style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
                                 onMouseMove={(e) => handleMouseMove(e, e.currentTarget)}
-                                onMouseLeave={(e) => handleMouseLeave(e.currentTarget)}
+                                onMouseLeave={(e) => {
+                                    handleMouseLeave(e.currentTarget);
+                                    handleMouseLeaveVideo(project.id);
+                                }}
+                                onMouseEnter={() => handleMouseEnter(project.id)}
+                                onClick={() => handleProjectClick(project.id)}
                                 data-cursor="VIEW"
                             >
-                                {/* Background Image */}
+                                {/* Video Background */}
                                 <div className="absolute inset-0">
-                                    <img
-                                        src={project.image}
-                                        alt={project.title}
-                                        className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-110 transition-all duration-1000"
+                                    <video
+                                        ref={(el) => {
+                                            videoRefs.current[project.id] = el;
+                                        }}
+                                        src="/dummy.mp4"
+                                        className="w-full h-full object-cover"
+                                        loop
+                                        muted
+                                        playsInline
                                     />
                                     <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-700" />
                                 </div>
@@ -563,6 +602,71 @@ export default function Work() {
                     </div>
                 </div>
             </div>
+
+            {/* Video Preview Modal */}
+            {selectedProject !== null && (
+                <div
+                    className="fixed inset-0 z-9999 bg-black/95 backdrop-blur-md flex items-center justify-center p-4 md:p-8"
+                    onClick={closeModal}
+                >
+                    <button
+                        onClick={closeModal}
+                        className="absolute top-8 right-8 w-12 h-12 flex items-center justify-center bg-white/10 hover:bg-lime-acid hover:text-black border border-white/20 transition-all duration-300 hover-trigger z-10"
+                        data-cursor="CLOSE"
+                    >
+                        <span className="font-mono text-2xl leading-none">×</span>
+                    </button>
+
+                    <div
+                        className="relative w-full max-w-6xl aspect-video bg-black border border-white/20"
+                        onClick={(e) => e.stopPropagation()}
+                    >
+                        <video
+                            src="/dummy.mp4"
+                            className="w-full h-full object-contain"
+                            controls
+                            autoPlay
+                            loop
+                        />
+                    </div>
+
+                    {/* Project Info */}
+                    {projects.find(p => p.id === selectedProject) && (
+                        <div className="absolute bottom-8 left-8 right-8 max-w-6xl mx-auto">
+                            <div className="bg-black/50 backdrop-blur-sm border border-white/10 p-6">
+                                <div className="flex items-start justify-between gap-4">
+                                    <div>
+                                        <h3 className="font-display text-2xl md:text-3xl font-bold text-white mb-2">
+                                            {projects.find(p => p.id === selectedProject)?.title}
+                                        </h3>
+                                        <p className="font-body text-white/70 text-sm md:text-base mb-4">
+                                            {projects.find(p => p.id === selectedProject)?.desc}
+                                        </p>
+                                        <div className="flex flex-wrap gap-2">
+                                            {projects.find(p => p.id === selectedProject)?.tags.map((tag, i) => (
+                                                <span
+                                                    key={i}
+                                                    className="font-mono text-xs px-3 py-1 bg-lime-acid/10 text-lime-acid border border-lime-acid/20"
+                                                >
+                                                    {tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="text-right shrink-0">
+                                        <span className="font-mono text-xs text-white/50 uppercase tracking-wider">
+                                            {projects.find(p => p.id === selectedProject)?.category}
+                                        </span>
+                                        <div className="font-mono text-lg text-lime-acid mt-1">
+                                            {projects.find(p => p.id === selectedProject)?.year}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            )}
         </section>
     );
 }
